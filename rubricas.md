@@ -17,68 +17,183 @@ title: Rúbricas SOLO
 </div>
 </div>
 
+<div class="grading-panel" data-site-key="contexto">
+  <div class="gp-row">
+    <label class="gp-label" for="gp-name">👤 Estudiante / grupo</label>
+    <input type="text" id="gp-name" class="gp-input" placeholder="Nombre del estudiante o grupo">
+  </div>
+  <div class="gp-scores">
+    <div class="gp-score-item"><span class="gp-score-label">Entrega 1 (30%)</span><span class="gp-score-value" id="gp-score-0">—</span></div>
+    <div class="gp-score-item"><span class="gp-score-label">Entrega 2 (30%)</span><span class="gp-score-value" id="gp-score-1">—</span></div>
+    <div class="gp-score-item"><span class="gp-score-label">Entrega 3 (40%)</span><span class="gp-score-value" id="gp-score-2">—</span></div>
+    <div class="gp-score-item gp-final"><span class="gp-score-label">Nota final</span><span class="gp-score-value" id="gp-final">—</span></div>
+  </div>
+  <div class="gp-actions">
+    <button type="button" id="gp-save" class="gp-btn gp-btn-primary">💾 Guardar y calificar siguiente</button>
+    <button type="button" id="gp-reset" class="gp-btn">↺ Limpiar selección</button>
+  </div>
+</div>
+<div class="gp-toast" id="gp-toast"></div>
+
 <div class="rubric-activity">
 <h2>1. Carta-audio a Lucas — Corte 1 (30%) · Sesión 2</h2>
 <p>Evalúa el tránsito personal de la burbuja cartesiana a la relacionalidad. No se evalúa "redacción" sino <strong>autenticidad, especificidad y apropiación conceptual</strong>.</p>
 <div class="weight-pill">Peso en la nota final <div class="bar"><i style="width:30%;"></i></div> 30%</div>
 </div>
 
-<div class="rubric-wrap">
-<table class="rubric">
-<thead>
-<tr>
-  <th>Criterio</th>
-  <th>1 · Preestructural</th>
-  <th>2 · Uniestructural</th>
-  <th>3 · Multiestructural</th>
-  <th>4 · Relacional</th>
-  <th>5 · Abstracto ampliado</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Identificación de la burbuja cartesiana en la propia práctica</td>
-  <td>No identifica ninguna forma de pensamiento causal/fragmentado en su experiencia.</td>
-  <td>Menciona la idea de "burbuja cartesiana" solo como concepto, sin ubicarla en sí mismo.</td>
-  <td>Señala uno o dos momentos concretos en que pensó/actuó de forma cartesiana.</td>
-  <td>Explica cómo ese pensamiento cartesiano se conecta con su formación, su entorno y su práctica profesional.</td>
-  <td>Cuestiona críticamente el origen histórico-cultural de su propia formación cartesiana y lo proyecta a su rol futuro en salud pública.</td>
-</tr>
-<tr>
-  <td>Anécdota personal concreta (no genérica)</td>
-  <td>No hay anécdota; solo afirmaciones abstractas o copiadas.</td>
-  <td>Menciona una situación, pero sin detalles que la hagan verificablemente propia.</td>
-  <td>Relata una anécdota propia con algunos detalles concretos (lugar, persona, momento).</td>
-  <td>La anécdota es específica, detallada y se usa como evidencia para sostener su reflexión.</td>
-  <td>La anécdota se convierte en un caso analítico que ilumina un patrón más amplio de su práctica o comunidad.</td>
-</tr>
-<tr>
-  <td>Conexión con relacionalidad / pensamiento complejo</td>
-  <td>No menciona relacionalidad ni pensamiento complejo.</td>
-  <td>Nombra el concepto sin explicarlo.</td>
-  <td>Explica el concepto de forma correcta pero desligada de su anécdota.</td>
-  <td>Integra el concepto con su propia experiencia de forma coherente.</td>
-  <td>Usa la relacionalidad para replantear su anécdota desde una mirada nueva, no solo para "ilustrarla".</td>
-</tr>
-<tr>
-  <td>Autenticidad y voz propia (formato audio)</td>
-  <td>Texto leído/genérico, sin tono personal; evidencia de copia o IA.</td>
-  <td>Voz propia presente, pero con lenguaje muy general o guionado.</td>
-  <td>Tono personal claro en la mayor parte del audio.</td>
-  <td>Tono personal sostenido, con pausas, dudas o emociones genuinas propias del formato oral espontáneo.</td>
-  <td>El registro oral evidencia apropiación total: el estudiante piensa en voz alta, no recita.</td>
-</tr>
-<tr>
-  <td>Proyección: qué cambiaría desde una mirada relacional</td>
-  <td>No propone ningún cambio o proyección.</td>
-  <td>Menciona un cambio genérico ("ser más empático").</td>
-  <td>Propone un cambio concreto en su práctica.</td>
-  <td>El cambio propuesto se articula con los conceptos vistos en la sesión.</td>
-  <td>La proyección abre preguntas nuevas para su formación como profesional de salud pública.</td>
-</tr>
-</tbody>
-</table>
+<div class="irubric" data-entrega="0" data-weight="30">
+  <div class="irc" data-weight="20">
+    <div class="irc-head"><span class="irc-name">Identificación de la burbuja cartesiana en la propia práctica</span><span class="irc-weight">20%</span></div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c0" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">No identifica ninguna forma de pensamiento causal/fragmentado en su experiencia.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c0" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Menciona la idea de "burbuja cartesiana" solo como concepto, sin ubicarla en sí mismo.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c0" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Señala uno o dos momentos concretos en que pensó/actuó de forma cartesiana.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c0" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">Explica cómo ese pensamiento cartesiano se conecta con su formación, su entorno y su práctica profesional.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c0" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">Cuestiona críticamente el origen histórico-cultural de su propia formación cartesiana y lo proyecta a su rol futuro en salud pública.</span>
+      </label>
+    </div>
+  </div>
+  <div class="irc" data-weight="20">
+    <div class="irc-head"><span class="irc-name">Anécdota personal concreta (no genérica)</span><span class="irc-weight">20%</span></div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c1" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">No hay anécdota; solo afirmaciones abstractas o copiadas.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c1" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Menciona una situación, pero sin detalles que la hagan verificablemente propia.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c1" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Relata una anécdota propia con algunos detalles concretos (lugar, persona, momento).</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c1" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">La anécdota es específica, detallada y se usa como evidencia para sostener su reflexión.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c1" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">La anécdota se convierte en un caso analítico que ilumina un patrón más amplio de su práctica o comunidad.</span>
+      </label>
+    </div>
+  </div>
+  <div class="irc" data-weight="20">
+    <div class="irc-head"><span class="irc-name">Conexión con relacionalidad / pensamiento complejo</span><span class="irc-weight">20%</span></div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c2" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">No menciona relacionalidad ni pensamiento complejo.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c2" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Nombra el concepto sin explicarlo.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c2" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Explica el concepto de forma correcta pero desligada de su anécdota.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c2" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">Integra el concepto con su propia experiencia de forma coherente.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c2" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">Usa la relacionalidad para replantear su anécdota desde una mirada nueva, no solo para "ilustrarla".</span>
+      </label>
+    </div>
+  </div>
+  <div class="irc" data-weight="20">
+    <div class="irc-head"><span class="irc-name">Autenticidad y voz propia (formato audio)</span><span class="irc-weight">20%</span></div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c3" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">Texto leído/genérico, sin tono personal; evidencia de copia o IA.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c3" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Voz propia presente, pero con lenguaje muy general o guionado.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c3" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Tono personal claro en la mayor parte del audio.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c3" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">Tono personal sostenido, con pausas, dudas o emociones genuinas propias del formato oral espontáneo.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c3" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">El registro oral evidencia apropiación total: el estudiante piensa en voz alta, no recita.</span>
+      </label>
+    </div>
+  </div>
+  <div class="irc" data-weight="20">
+    <div class="irc-head"><span class="irc-name">Proyección: qué cambiaría desde una mirada relacional</span><span class="irc-weight">20%</span></div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c4" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">No propone ningún cambio o proyección.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c4" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Menciona un cambio genérico ("ser más empático").</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c4" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Propone un cambio concreto en su práctica.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c4" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">El cambio propuesto se articula con los conceptos vistos en la sesión.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e0-c4" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">La proyección abre preguntas nuevas para su formación como profesional de salud pública.</span>
+      </label>
+    </div>
+  </div>
 </div>
+<div class="irc-result" id="irubric-result-0">Sin calificar aún</div>
 
 <div class="rubric-activity">
 <h2>2. Debate estructurado — Corte 2 (30%) · Sesión 3</h2>
@@ -86,62 +201,159 @@ title: Rúbricas SOLO
 <div class="weight-pill">Peso en la nota final <div class="bar"><i style="width:30%;"></i></div> 30%</div>
 </div>
 
-<div class="rubric-wrap">
-<table class="rubric">
-<thead>
-<tr>
-  <th>Criterio</th>
-  <th>1 · Preestructural</th>
-  <th>2 · Uniestructural</th>
-  <th>3 · Multiestructural</th>
-  <th>4 · Relacional</th>
-  <th>5 · Abstracto ampliado</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Calidad y pertinencia de los argumentos</td>
-  <td>No presenta argumentos o son irrelevantes al tema.</td>
-  <td>Presenta un solo argumento, sin evidencia que lo respalde.</td>
-  <td>Presenta varios argumentos, pero de forma aislada (lista, no estructura).</td>
-  <td>Los argumentos se articulan entre sí y se apoyan en evidencia de las lecturas de la sesión.</td>
-  <td>Anticipa contraargumentos y los incorpora para fortalecer su postura.</td>
-</tr>
-<tr>
-  <td>Estructura del discurso (apertura, cuerpo, cierre)</td>
-  <td>Intervención desorganizada, sin estructura reconocible.</td>
-  <td>Solo presenta apertura o solo cierre, sin desarrollo intermedio.</td>
-  <td>Incluye apertura, cuerpo y cierre, aunque desconectados entre sí.</td>
-  <td>La estructura es coherente: el cierre retoma la tesis inicial reforzada por el cuerpo argumental.</td>
-  <td>La estructura se adapta estratégicamente según lo que argumenta la otra postura.</td>
-</tr>
-<tr>
-  <td>Réplica y escucha activa</td>
-  <td>No responde a los argumentos del otro equipo.</td>
-  <td>Responde de forma genérica, sin citar lo dicho por el contrincante.</td>
-  <td>Responde a uno de los puntos planteados por el otro equipo.</td>
-  <td>Responde puntualmente a varios argumentos contrarios, mostrando escucha real.</td>
-  <td>Usa la réplica para tender puentes o matizar posturas, mostrando comprensión profunda de ambas visiones.</td>
-</tr>
-<tr>
-  <td>Manejo de tiempos y reglas del debate</td>
-  <td>Ignora tiempos y reglas asignadas.</td>
-  <td>Respeta los tiempos con dificultad, requiere llamados de atención.</td>
-  <td>Respeta tiempos y turnos la mayor parte del debate.</td>
-  <td>Administra su tiempo estratégicamente (apertura, réplica) sin apoyo externo.</td>
-  <td>El manejo del tiempo potencia la claridad y el impacto del argumento.</td>
-</tr>
-<tr>
-  <td>Articulación con la bibliografía de la sesión</td>
-  <td>No hay referencia a las lecturas de la sesión.</td>
-  <td>Menciona un autor o concepto de forma superficial.</td>
-  <td>Usa conceptos de las lecturas (modernidad, salud internacional/global) de forma correcta.</td>
-  <td>Integra los conceptos de las lecturas como parte central del argumento.</td>
-  <td>Pone en diálogo crítico ambas lecturas (Martín-Barbero y Rojas Ochoa) para sostener su postura.</td>
-</tr>
-</tbody>
-</table>
+<div class="irubric" data-entrega="1" data-weight="30">
+  <div class="irc" data-weight="20">
+    <div class="irc-head"><span class="irc-name">Calidad y pertinencia de los argumentos</span><span class="irc-weight">20%</span></div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c0" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">No presenta argumentos o son irrelevantes al tema.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c0" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Presenta un solo argumento, sin evidencia que lo respalde.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c0" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Presenta varios argumentos, pero de forma aislada (lista, no estructura).</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c0" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">Los argumentos se articulan entre sí y se apoyan en evidencia de las lecturas de la sesión.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c0" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">Anticipa contraargumentos y los incorpora para fortalecer su postura.</span>
+      </label>
+    </div>
+  </div>
+  <div class="irc" data-weight="20">
+    <div class="irc-head"><span class="irc-name">Estructura del discurso (apertura, cuerpo, cierre)</span><span class="irc-weight">20%</span></div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c1" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">Intervención desorganizada, sin estructura reconocible.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c1" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Solo presenta apertura o solo cierre, sin desarrollo intermedio.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c1" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Incluye apertura, cuerpo y cierre, aunque desconectados entre sí.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c1" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">La estructura es coherente: el cierre retoma la tesis inicial reforzada por el cuerpo argumental.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c1" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">La estructura se adapta estratégicamente según lo que argumenta la otra postura.</span>
+      </label>
+    </div>
+  </div>
+  <div class="irc" data-weight="20">
+    <div class="irc-head"><span class="irc-name">Réplica y escucha activa</span><span class="irc-weight">20%</span></div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c2" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">No responde a los argumentos del otro equipo.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c2" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Responde de forma genérica, sin citar lo dicho por el contrincante.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c2" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Responde a uno de los puntos planteados por el otro equipo.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c2" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">Responde puntualmente a varios argumentos contrarios, mostrando escucha real.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c2" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">Usa la réplica para tender puentes o matizar posturas, mostrando comprensión profunda de ambas visiones.</span>
+      </label>
+    </div>
+  </div>
+  <div class="irc" data-weight="20">
+    <div class="irc-head"><span class="irc-name">Manejo de tiempos y reglas del debate</span><span class="irc-weight">20%</span></div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c3" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">Ignora tiempos y reglas asignadas.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c3" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Respeta los tiempos con dificultad, requiere llamados de atención.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c3" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Respeta tiempos y turnos la mayor parte del debate.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c3" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">Administra su tiempo estratégicamente (apertura, réplica) sin apoyo externo.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c3" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">El manejo del tiempo potencia la claridad y el impacto del argumento.</span>
+      </label>
+    </div>
+  </div>
+  <div class="irc" data-weight="20">
+    <div class="irc-head"><span class="irc-name">Articulación con la bibliografía de la sesión</span><span class="irc-weight">20%</span></div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c4" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">No hay referencia a las lecturas de la sesión.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c4" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Menciona un autor o concepto de forma superficial.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c4" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Usa conceptos de las lecturas (modernidad, salud internacional/global) de forma correcta.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c4" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">Integra los conceptos de las lecturas como parte central del argumento.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e1-c4" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">Pone en diálogo crítico ambas lecturas (Martín-Barbero y Rojas Ochoa) para sostener su postura.</span>
+      </label>
+    </div>
+  </div>
 </div>
+<div class="irc-result" id="irubric-result-1">Sin calificar aún</div>
 
 <div class="rubric-activity">
 <h2>3. Presentación final — Análisis de la problemática de los territorios — Corte 3 (40%) · Sesión 9</h2>
@@ -159,59 +371,173 @@ title: Rúbricas SOLO
 <p class="muted" style="font-size:13px; margin:6px 0 0;">Las dos filas restantes de la tabla son criterios formativos adicionales, sin peso propio en esta nota.</p>
 </div>
 
-<div class="rubric-wrap">
-<table class="rubric">
-<thead>
-<tr>
-  <th>Criterio</th>
-  <th>1 · Preestructural</th>
-  <th>2 · Uniestructural</th>
-  <th>3 · Multiestructural</th>
-  <th>4 · Relacional</th>
-  <th>5 · Abstracto ampliado</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Uso de herramientas audiovisuales (30%)</td>
-  <td>No usa apoyo audiovisual o es inadecuado para el contenido.</td>
-  <td>Usa un solo recurso audiovisual, de forma decorativa.</td>
-  <td>Combina varios recursos (mapas, gráficos, imágenes) sin integrarlos al argumento.</td>
-  <td>Los recursos audiovisuales refuerzan y clarifican el análisis presentado.</td>
-  <td>El diseño audiovisual comunica por sí mismo la complejidad del territorio analizado.</td>
-</tr>
-<tr>
-  <td>Expresión oral y manejo del público (30%)</td>
-  <td>No logra comunicar su análisis al público.</td>
-  <td>Lectura literal de notas/diapositivas, sin conexión con el público.</td>
-  <td>Se expresa con claridad, aunque con apoyo constante en notas.</td>
-  <td>Presenta con fluidez, contacto con el público y responde preguntas con seguridad.</td>
-  <td>Genera diálogo genuino con el público, ajustando su discurso según las preguntas.</td>
-</tr>
-<tr>
-  <td>Coherencia analítica y profundidad crítica — ruptura del causalismo (40%)</td>
-  <td>El análisis es puramente causal/biomédico ("factor de riesgo X causa Y").</td>
-  <td>Menciona determinantes sociales, pero como lista de factores aislados (sigue siendo multicausal, no relacional).</td>
-  <td>Conecta varios determinantes entre sí, aunque sin una lectura crítica de fondo (estructura, poder, historia).</td>
-  <td>Logra romper el causalismo: analiza el territorio desde la determinación social / salud colectiva con lectura crítica y estructural.</td>
-  <td>La ruptura del causalismo se articula con una propuesta transformadora, situada y con voz propia sobre el territorio.</td>
-</tr>
-<tr>
-  <td>Uso de fuentes oficiales y actualizadas (formativo)</td>
-  <td>No usa fuentes oficiales (ASIS, DANE, etc.).</td>
-  <td>Usa una fuente oficial, sin verificar actualidad.</td>
-  <td>Usa varias fuentes oficiales pertinentes al territorio elegido.</td>
-  <td>Triangula varias fuentes oficiales actualizadas para sustentar la problemática.</td>
-  <td>Contrasta críticamente los datos oficiales con la realidad social observada/reportada del territorio.</td>
-</tr>
-<tr>
-  <td>Articulación con corrientes de salud colectiva vistas en el curso (formativo)</td>
-  <td>No hay referencia a las corrientes vistas en el curso.</td>
-  <td>Nombra conceptos de la salud colectiva sin desarrollarlos.</td>
-  <td>Aplica correctamente uno o dos conceptos de la salud colectiva latinoamericana.</td>
-  <td>Integra varios conceptos del curso (determinación social, epidemiología crítica, salud colectiva) de forma coherente.</td>
-  <td>Usa las corrientes del curso para construir una interpretación original del territorio analizado.</td>
-</tr>
-</tbody>
+<div class="irubric" data-entrega="2" data-weight="40">
+  <div class="irc" data-weight="30">
+    <div class="irc-head"><span class="irc-name">Uso de herramientas audiovisuales</span><span class="irc-weight">30%</span></div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c0" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">No usa apoyo audiovisual o es inadecuado para el contenido.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c0" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Usa un solo recurso audiovisual, de forma decorativa.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c0" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Combina varios recursos (mapas, gráficos, imágenes) sin integrarlos al argumento.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c0" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">Los recursos audiovisuales refuerzan y clarifican el análisis presentado.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c0" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">El diseño audiovisual comunica por sí mismo la complejidad del territorio analizado.</span>
+      </label>
+    </div>
+  </div>
+  <div class="irc" data-weight="30">
+    <div class="irc-head"><span class="irc-name">Expresión oral y manejo del público</span><span class="irc-weight">30%</span></div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c1" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">No logra comunicar su análisis al público.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c1" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Lectura literal de notas/diapositivas, sin conexión con el público.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c1" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Se expresa con claridad, aunque con apoyo constante en notas.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c1" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">Presenta con fluidez, contacto con el público y responde preguntas con seguridad.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c1" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">Genera diálogo genuino con el público, ajustando su discurso según las preguntas.</span>
+      </label>
+    </div>
+  </div>
+  <div class="irc" data-weight="40">
+    <div class="irc-head"><span class="irc-name">Coherencia analítica y profundidad crítica — ruptura del causalismo</span><span class="irc-weight">40%</span></div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c2" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">El análisis es puramente causal/biomédico ("factor de riesgo X causa Y").</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c2" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Menciona determinantes sociales, pero como lista de factores aislados (sigue siendo multicausal, no relacional).</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c2" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Conecta varios determinantes entre sí, aunque sin una lectura crítica de fondo (estructura, poder, historia).</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c2" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">Logra romper el causalismo: analiza el territorio desde la determinación social / salud colectiva con lectura crítica y estructural.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c2" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">La ruptura del causalismo se articula con una propuesta transformadora, situada y con voz propia sobre el territorio.</span>
+      </label>
+    </div>
+  </div>
+  <div class="irc irc-formative">
+    <div class="irc-head"><span class="irc-name">Uso de fuentes oficiales y actualizadas</span><span class="irc-weight irc-weight-formative">Formativo</span></div>
+    <div class="irc-sub irc-sub-formative">Criterio formativo: no suma a la nota, es referencia de retroalimentación.</div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c3" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">No usa fuentes oficiales (ASIS, DANE, etc.).</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c3" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Usa una fuente oficial, sin verificar actualidad.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c3" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Usa varias fuentes oficiales pertinentes al territorio elegido.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c3" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">Triangula varias fuentes oficiales actualizadas para sustentar la problemática.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c3" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">Contrasta críticamente los datos oficiales con la realidad social observada/reportada del territorio.</span>
+      </label>
+    </div>
+  </div>
+  <div class="irc irc-formative">
+    <div class="irc-head"><span class="irc-name">Articulación con corrientes de salud colectiva vistas en el curso</span><span class="irc-weight irc-weight-formative">Formativo</span></div>
+    <div class="irc-sub irc-sub-formative">Criterio formativo: no suma a la nota, es referencia de retroalimentación.</div>
+    <div class="irc-levels">
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c4" data-level="1" data-score="1.0">
+        <span class="irc-opt-top">1 · Preestructural</span>
+        <span class="irc-opt-desc">No hay referencia a las corrientes vistas en el curso.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c4" data-level="2" data-score="2.0">
+        <span class="irc-opt-top">2 · Uniestructural</span>
+        <span class="irc-opt-desc">Nombra conceptos de la salud colectiva sin desarrollarlos.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c4" data-level="3" data-score="3.0">
+        <span class="irc-opt-top">3 · Multiestructural</span>
+        <span class="irc-opt-desc">Aplica correctamente uno o dos conceptos de la salud colectiva latinoamericana.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c4" data-level="4" data-score="4.0">
+        <span class="irc-opt-top">4 · Relacional</span>
+        <span class="irc-opt-desc">Integra varios conceptos del curso (determinación social, epidemiología crítica, salud colectiva) de forma coherente.</span>
+      </label>
+      <label class="irc-opt">
+        <input type="radio" name="contexto-e2-c4" data-level="5" data-score="5.0">
+        <span class="irc-opt-top">5 · Abstracto ampliado</span>
+        <span class="irc-opt-desc">Usa las corrientes del curso para construir una interpretación original del territorio analizado.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<div class="irc-result" id="irubric-result-2">Sin calificar aún</div>
+
+<div class="gp-savedlist-wrap">
+<h2>📋 Calificaciones guardadas en este navegador</h2>
+<p class="muted" style="font-size:13px; margin-top:-6px;">Se guardan localmente en este navegador (no se suben a ningún servidor). Usa "Copiar todo" para pegarlas en Excel u otra planilla.</p>
+<div class="gp-savedlist-actions">
+  <button type="button" id="gp-copy" class="gp-btn">📋 Copiar todo (para Excel)</button>
+  <button type="button" id="gp-clearall" class="gp-btn gp-btn-danger">🗑 Borrar todas</button>
+</div>
+<div class="gp-table-wrap">
+<table class="gp-table">
+<thead><tr><th>Estudiante</th><th>Entrega 1 (30%)</th><th>Entrega 2 (30%)</th><th>Entrega 3 (40%)</th><th>Nota final</th><th></th></tr></thead>
+<tbody id="gp-table-body"></tbody>
 </table>
+</div>
 </div>

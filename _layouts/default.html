@@ -55,5 +55,292 @@
       });
     });
   </script>
+  <script>
+  // Rúbricas SOLO interactivas — cálculo de nota y gestión de calificaciones guardadas
+  (function () {
+    var panel = document.querySelector('.grading-panel');
+    if (!panel) return;
+
+    var siteKey = panel.dataset.siteKey || 'site';
+    var CUR_KEY = 'rubrica_current_' + siteKey;
+    var SAVED_KEY = 'rubrica_saved_' + siteKey;
+
+    var irubrics = Array.prototype.slice.call(document.querySelectorAll('.irubric'));
+    var nameInput = document.getElementById('gp-name');
+    var finalEl = document.getElementById('gp-final');
+    var finalItemEl = finalEl ? finalEl.closest('.gp-score-item') : null;
+
+    function fmt(n) { return (n === null || n === undefined || isNaN(n)) ? '—' : n.toFixed(2); }
+
+    function computeEntrega(irubricEl) {
+      var crits = Array.prototype.slice.call(irubricEl.querySelectorAll('.irc[data-weight]'));
+      var sumWeighted = 0, sumWeightAnswered = 0, answered = 0;
+      crits.forEach(function (c) {
+        var w = parseFloat(c.dataset.weight);
+        var checked = c.querySelector('input[type="radio"]:checked');
+        if (checked) {
+          sumWeighted += w * parseFloat(checked.dataset.score);
+          sumWeightAnswered += w;
+          answered++;
+        }
+      });
+      var total = crits.length;
+      if (answered === 0) return { score: null, answered: answered, total: total };
+      return { score: sumWeighted / sumWeightAnswered, answered: answered, total: total };
+    }
+
+    function recompute() {
+      var entregaResults = [];
+      irubrics.forEach(function (irEl, i) {
+        var r = computeEntrega(irEl);
+        entregaResults.push(r);
+        var scoreEl = document.getElementById('gp-score-' + i);
+        var itemEl = scoreEl ? scoreEl.closest('.gp-score-item') : null;
+        if (scoreEl) {
+          scoreEl.textContent = fmt(r.score);
+          if (itemEl) itemEl.classList.toggle('gp-incomplete', r.score !== null && r.answered < r.total);
+        }
+        var resultEl = document.getElementById('irubric-result-' + i);
+        if (resultEl) {
+          resultEl.innerHTML = r.score === null
+            ? 'Sin calificar aún'
+            : 'Nota de esta entrega: <strong>' + fmt(r.score) + '</strong>' + (r.answered < r.total ? ' &middot; ' + r.answered + '/' + r.total + ' criterios' : '');
+        }
+      });
+
+      var sumW = 0, sumWA = 0;
+      irubrics.forEach(function (irEl, i) {
+        var w = parseFloat(irEl.dataset.weight);
+        var r = entregaResults[i];
+        if (r.score !== null) { sumW += w; sumWA += w * r.score; }
+      });
+      var complete = entregaResults.every(function (r) { return r.answered === r.total; });
+      var finalScore = sumW > 0 ? (sumWA / sumW) : null;
+      if (finalEl) {
+        finalEl.textContent = fmt(finalScore);
+        if (finalItemEl) finalItemEl.classList.toggle('gp-incomplete', finalScore !== null && !complete);
+      }
+      return { entregaResults: entregaResults, finalScore: finalScore, complete: complete };
+    }
+
+    function currentSelections() {
+      var sel = {};
+      document.querySelectorAll('.irc-opt input[type="radio"]:checked').forEach(function (inp) {
+        sel[inp.name] = inp.dataset.level;
+      });
+      return sel;
+    }
+
+    function applySelections(sel) {
+      sel = sel || {};
+      document.querySelectorAll('.irc-opt input[type="radio"]').forEach(function (inp) {
+        inp.checked = (sel[inp.name] === inp.dataset.level);
+      });
+      document.querySelectorAll('.irc-opt').forEach(function (o) {
+        var inp = o.querySelector('input[type="radio"]');
+        o.classList.toggle('selected', !!(inp && inp.checked));
+      });
+    }
+
+    function saveCurrent() {
+      try {
+        localStorage.setItem(CUR_KEY, JSON.stringify({ name: nameInput ? nameInput.value : '', selections: currentSelections() }));
+      } catch (e) {}
+    }
+
+    function loadCurrent() {
+      try {
+        var raw = localStorage.getItem(CUR_KEY);
+        if (!raw) return;
+        var data = JSON.parse(raw);
+        if (nameInput && data.name) nameInput.value = data.name;
+        if (data.selections) applySelections(data.selections);
+      } catch (e) {}
+    }
+
+    function loadSaved() {
+      try { return JSON.parse(localStorage.getItem(SAVED_KEY) || '[]'); } catch (e) { return []; }
+    }
+    function persistSaved(list) {
+      try { localStorage.setItem(SAVED_KEY, JSON.stringify(list)); } catch (e) {}
+    }
+
+    function toast(msg) {
+      var el = document.getElementById('gp-toast');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(el._t);
+      el._t = setTimeout(function () { el.classList.remove('show'); }, 2200);
+    }
+
+    function renderSaved() {
+      var body = document.getElementById('gp-table-body');
+      if (!body) return;
+      var list = loadSaved();
+      body.innerHTML = '';
+      if (list.length === 0) {
+        var trEmpty = document.createElement('tr');
+        trEmpty.className = 'gp-empty-row';
+        var tdEmpty = document.createElement('td');
+        tdEmpty.colSpan = irubrics.length + 3;
+        tdEmpty.textContent = 'Aún no hay calificaciones guardadas.';
+        trEmpty.appendChild(tdEmpty);
+        body.appendChild(trEmpty);
+        return;
+      }
+      list.forEach(function (rec, idx) {
+        var tr = document.createElement('tr');
+
+        var tdName = document.createElement('td');
+        tdName.textContent = rec.name;
+        tdName.style.cursor = 'pointer';
+        tdName.title = 'Clic para cargar y editar';
+        tdName.addEventListener('click', function () {
+          applySelections(rec.selections || {});
+          if (nameInput) nameInput.value = rec.name;
+          recompute();
+          saveCurrent();
+          if (panel.scrollIntoView) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          toast('Cargado: ' + rec.name);
+        });
+        tr.appendChild(tdName);
+
+        (rec.scores || []).forEach(function (s) {
+          var td = document.createElement('td');
+          td.textContent = fmt(s);
+          tr.appendChild(td);
+        });
+
+        var tdFinal = document.createElement('td');
+        tdFinal.className = 'gp-final-cell';
+        tdFinal.textContent = fmt(rec.final);
+        tr.appendChild(tdFinal);
+
+        var tdDel = document.createElement('td');
+        var delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.className = 'gp-del-btn';
+        delBtn.innerHTML = '🗑';
+        delBtn.title = 'Eliminar';
+        delBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var list2 = loadSaved();
+          list2.splice(idx, 1);
+          persistSaved(list2);
+          renderSaved();
+          toast('Eliminado: ' + rec.name);
+        });
+        tdDel.appendChild(delBtn);
+        tr.appendChild(tdDel);
+
+        body.appendChild(tr);
+      });
+    }
+
+    document.addEventListener('change', function (e) {
+      if (e.target.matches && e.target.matches('.irc-opt input[type="radio"]')) {
+        document.querySelectorAll('.irc-opt').forEach(function (o) { o.classList.remove('selected'); });
+        document.querySelectorAll('.irc-opt input[type="radio"]:checked').forEach(function (inp) {
+          inp.closest('.irc-opt').classList.add('selected');
+        });
+        recompute();
+        saveCurrent();
+      }
+    });
+
+    if (nameInput) {
+      nameInput.addEventListener('input', saveCurrent);
+    }
+
+    var saveBtn = document.getElementById('gp-save');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', function () {
+        var name = nameInput ? nameInput.value.trim() : '';
+        if (!name) {
+          if (nameInput) {
+            nameInput.focus();
+            nameInput.style.borderColor = '#dc2626';
+            setTimeout(function () { nameInput.style.borderColor = ''; }, 1200);
+          }
+          toast('Escribe el nombre del estudiante o grupo primero');
+          return;
+        }
+        var result = recompute();
+        if (!result.complete) {
+          var proceed = confirm('Aún faltan criterios por calificar. ¿Guardar de todas formas?');
+          if (!proceed) return;
+        }
+        var list = loadSaved();
+        var scores = result.entregaResults.map(function (r) { return r.score; });
+        var record = { name: name, selections: currentSelections(), scores: scores, final: result.finalScore, ts: Date.now() };
+        var existingIdx = list.findIndex(function (r) { return r.name.trim().toLowerCase() === name.toLowerCase(); });
+        if (existingIdx >= 0) list[existingIdx] = record; else list.push(record);
+        persistSaved(list);
+        renderSaved();
+
+        document.querySelectorAll('.irc-opt input[type="radio"]').forEach(function (inp) { inp.checked = false; });
+        document.querySelectorAll('.irc-opt').forEach(function (o) { o.classList.remove('selected'); });
+        if (nameInput) nameInput.value = '';
+        recompute();
+        try { localStorage.removeItem(CUR_KEY); } catch (e) {}
+        toast('Guardado: ' + name);
+      });
+    }
+
+    var resetBtn = document.getElementById('gp-reset');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        if (!confirm('¿Limpiar la selección actual sin guardar?')) return;
+        document.querySelectorAll('.irc-opt input[type="radio"]').forEach(function (inp) { inp.checked = false; });
+        document.querySelectorAll('.irc-opt').forEach(function (o) { o.classList.remove('selected'); });
+        if (nameInput) nameInput.value = '';
+        recompute();
+        try { localStorage.removeItem(CUR_KEY); } catch (e) {}
+      });
+    }
+
+    var copyBtn = document.getElementById('gp-copy');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function () {
+        var list = loadSaved();
+        if (list.length === 0) { toast('No hay calificaciones guardadas todavía'); return; }
+        var headers = ['Estudiante'].concat(irubrics.map(function (irEl, i) {
+          return 'Entrega ' + (i + 1) + ' (' + irEl.dataset.weight + '%)';
+        })).concat(['Nota final']);
+        var lines = [headers.join('\t')];
+        list.forEach(function (rec) {
+          var row = [rec.name].concat((rec.scores || []).map(fmt)).concat([fmt(rec.final)]);
+          lines.push(row.join('\t'));
+        });
+        var text = lines.join('\n');
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            toast('¡Copiado! Pégalo en Excel o Sheets.');
+          }, function () {
+            toast('No se pudo copiar automáticamente');
+          });
+        } else {
+          toast('Tu navegador no permite copiar automáticamente');
+        }
+      });
+    }
+
+    var clearAllBtn = document.getElementById('gp-clearall');
+    if (clearAllBtn) {
+      clearAllBtn.addEventListener('click', function () {
+        if (!confirm('¿Borrar TODAS las calificaciones guardadas de esta página? Esta acción no se puede deshacer.')) return;
+        persistSaved([]);
+        renderSaved();
+        toast('Lista borrada');
+      });
+    }
+
+    loadCurrent();
+    recompute();
+    renderSaved();
+  })();
+  </script>
+
 </body>
 </html>
