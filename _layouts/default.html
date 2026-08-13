@@ -12,36 +12,69 @@
   <link rel="icon" href="data:,">
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap header-inner">
+  <div class="shell">
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
+
+    <aside class="sidebar" id="sidebar">
       <a class="brand" href="{{ '/' | relative_url }}">
         <img class="brand-logo" src="{{ '/assets/images/areandina-logo-blanco.png' | relative_url }}" alt="Fundación Universitaria del Área Andina">
-        <span class="brand-divider"></span>
         <span class="brand-text">
           <strong>{{ site.short_title }}</strong>
           <small>{{ site.program }}</small>
         </span>
       </a>
-      <button class="nav-toggle" aria-label="Abrir menú" onclick="document.querySelector('.site-nav').classList.toggle('open')">☰</button>
-      <nav class="site-nav">
+      <nav class="sidebar-nav">
         {% for item in site.nav %}
           <a href="{{ item.url | relative_url }}" class="{% if page.url == item.url %}active{% endif %}">{{ item.title }}</a>
         {% endfor %}
       </nav>
+      <div class="sidebar-meta">{{ site.semester }} · {{ site.credits }}</div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="main-area">
+      <main class="content">
+        {{ content }}
+      </main>
+
+      <footer class="site-footer">
+        <p>{{ site.program }} · {{ site.short_title }} · {{ site.semester }} · {{ site.credits }}</p>
+        <p class="muted">Facultad de Ciencias de la Salud y del Deporte — Fundación Universitaria del Área Andina</p>
+      </footer>
     </div>
-  </header>
+  </div>
 
-  <main class="wrap content">
-    {{ content }}
-  </main>
+  <script>
+    // Menú lateral desplegable (móvil/tablet): abrir, cerrar con overlay, cerrar al navegar
+    (function () {
+      var toggle = document.getElementById('sidebarToggle');
+      var sidebar = document.getElementById('sidebar');
+      var overlay = document.getElementById('sidebarOverlay');
+      if (!toggle || !sidebar || !overlay) return;
 
-  <footer class="site-footer">
-    <div class="wrap">
-      <p>{{ site.program }} · {{ site.short_title }} · {{ site.semester }} · {{ site.credits }}</p>
-      <p class="muted">Facultad de Ciencias de la Salud y del Deporte — Fundación Universitaria del Área Andina</p>
-    </div>
-  </footer>
-
+      function openSidebar() {
+        sidebar.classList.add('open');
+        overlay.classList.add('show');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+      function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      toggle.addEventListener('click', function () {
+        if (sidebar.classList.contains('open')) closeSidebar(); else openSidebar();
+      });
+      overlay.addEventListener('click', closeSidebar);
+      sidebar.querySelectorAll('.sidebar-nav a').forEach(function (a) {
+        a.addEventListener('click', closeSidebar);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeSidebar();
+      });
+    })();
+  </script>
   <script>
     // Organizadores gráficos interactivos: nodos y lentes desplegables al clic
     document.querySelectorAll('.cd-node[data-expandable], .dual-lens .lens[data-expandable], .dual-route .route-col[data-expandable]').forEach(function (el) {
@@ -140,6 +173,17 @@
         var inp = o.querySelector('input[type="radio"]');
         o.classList.toggle('selected', !!(inp && inp.checked));
       });
+      document.querySelectorAll('tr.irc').forEach(function (row) {
+        var checked = row.querySelector('input[type="radio"]:checked');
+        var rowScoreEl = row.querySelector('.irc-row-score');
+        if (rowScoreEl) rowScoreEl.textContent = checked ? fmt(parseFloat(checked.dataset.score)) : '—';
+      });
+    }
+
+    function clearAllSelections() {
+      document.querySelectorAll('.irc-opt input[type="radio"]').forEach(function (inp) { inp.checked = false; });
+      document.querySelectorAll('.irc-opt').forEach(function (o) { o.classList.remove('selected'); });
+      document.querySelectorAll('.irc-row-score').forEach(function (el) { el.textContent = '—'; });
     }
 
     function saveCurrent() {
@@ -240,10 +284,13 @@
 
     document.addEventListener('change', function (e) {
       if (e.target.matches && e.target.matches('.irc-opt input[type="radio"]')) {
-        document.querySelectorAll('.irc-opt').forEach(function (o) { o.classList.remove('selected'); });
-        document.querySelectorAll('.irc-opt input[type="radio"]:checked').forEach(function (inp) {
-          inp.closest('.irc-opt').classList.add('selected');
-        });
+        var row = e.target.closest('tr');
+        if (row) {
+          row.querySelectorAll('.irc-opt').forEach(function (o) { o.classList.remove('selected'); });
+          var rowScoreEl = row.querySelector('.irc-row-score');
+          if (rowScoreEl) rowScoreEl.textContent = fmt(parseFloat(e.target.dataset.score));
+        }
+        e.target.closest('.irc-opt').classList.add('selected');
         recompute();
         saveCurrent();
       }
@@ -279,8 +326,7 @@
         persistSaved(list);
         renderSaved();
 
-        document.querySelectorAll('.irc-opt input[type="radio"]').forEach(function (inp) { inp.checked = false; });
-        document.querySelectorAll('.irc-opt').forEach(function (o) { o.classList.remove('selected'); });
+        clearAllSelections();
         if (nameInput) nameInput.value = '';
         recompute();
         try { localStorage.removeItem(CUR_KEY); } catch (e) {}
@@ -292,8 +338,7 @@
     if (resetBtn) {
       resetBtn.addEventListener('click', function () {
         if (!confirm('¿Limpiar la selección actual sin guardar?')) return;
-        document.querySelectorAll('.irc-opt input[type="radio"]').forEach(function (inp) { inp.checked = false; });
-        document.querySelectorAll('.irc-opt').forEach(function (o) { o.classList.remove('selected'); });
+        clearAllSelections();
         if (nameInput) nameInput.value = '';
         recompute();
         try { localStorage.removeItem(CUR_KEY); } catch (e) {}
