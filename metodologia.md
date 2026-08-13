@@ -52,12 +52,6 @@ title: Metodología
   <span class="badge">💚 Ética del cuidado y buen vivir</span>
 </div>
 
-## 🧑‍🏫 Perfil del docente
-
-<div class="card">
-<p style="margin-bottom:0;">Doctorado en Ciencias Sociales o en Salud Pública, con énfasis en investigación y manejo de teorías en Salud Pública y Globalización, con capacidad crítica e interés por el análisis del contexto histórico y sociocultural del país en un mundo globalizado.</p>
-</div>
-
 ## 🌐 Internacionalización del currículo
 
 <div class="card">

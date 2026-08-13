@@ -11,7 +11,6 @@ title: Inicio
   <div class="stat-card"><div class="stat-icon">⏱</div><div class="stat-value">{{ site.data.curso.horas }} horas</div><div class="stat-label">4 créditos</div></div>
   <div class="stat-card"><div class="stat-icon">🗓</div><div class="stat-value">{{ site.data.curso.horario_general }}</div><div class="stat-label">Semanal</div></div>
   <div class="stat-card"><div class="stat-icon">📍</div><div class="stat-value">{{ site.data.curso.salon }}</div><div class="stat-label">Presencial</div></div>
-  <div class="stat-card"><div class="stat-icon">👤</div><div class="stat-value">{{ site.data.curso.docente }}</div><div class="stat-label">Docente</div></div>
 </div>
 
 <p><a href="{{ '/contenidos.html' | relative_url }}">Ver el calendario completo de las 9 sesiones →</a></p>
@@ -65,7 +64,3 @@ Este curso invita a analizar el contexto histórico y sociocultural de los fenó
 <div class="callout">
   <strong>Cómo usar este espacio:</strong> este sitio es la guía de referencia de la asignatura. Aquí encontrarán la metodología, el temario, la evaluación, la bibliografía (con actualización 2026) y las <a href="{{ '/rubricas.html' | relative_url }}">rúbricas SOLO</a> ligadas a cada actividad.
 </div>
-
-## 🧑‍🏫 Perfil del docente
-
-Doctorado en Ciencias Sociales o en Salud Pública, con énfasis en investigación y teorías en Salud Pública y Globalización, con capacidad crítica e interés por el análisis del contexto histórico y sociocultural del país en un mundo globalizado.

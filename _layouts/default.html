@@ -44,7 +44,7 @@
 
   <script>
     // Organizadores gráficos interactivos: nodos y lentes desplegables al clic
-    document.querySelectorAll('.cd-node[data-expandable], .dual-lens .lens[data-expandable]').forEach(function (el) {
+    document.querySelectorAll('.cd-node[data-expandable], .dual-lens .lens[data-expandable], .dual-route .route-col[data-expandable]').forEach(function (el) {
       el.addEventListener('click', function (e) {
         el.classList.toggle('expanded');
       });
