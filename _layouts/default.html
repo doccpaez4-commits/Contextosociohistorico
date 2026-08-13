@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.short_title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="{{ '/' | relative_url }}">
+        <img class="brand-logo" src="{{ '/assets/images/areandina-logo-blanco.png' | relative_url }}" alt="Fundación Universitaria del Área Andina">
+        <span class="brand-divider"></span>
+        <span class="brand-text">
+          <strong>{{ site.short_title }}</strong>
+          <small>{{ site.program }}</small>
+        </span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" onclick="document.querySelector('.site-nav').classList.toggle('open')">☰</button>
+      <nav class="site-nav">
+        {% for item in site.nav %}
+          <a href="{{ item.url | relative_url }}" class="{% if page.url == item.url %}active{% endif %}">{{ item.title }}</a>
+        {% endfor %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap content">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>{{ site.program }} · {{ site.short_title }} · {{ site.semester }} · {{ site.credits }}</p>
+      <p class="muted">Facultad de Ciencias de la Salud y del Deporte — Fundación Universitaria del Área Andina</p>
+    </div>
+  </footer>
+
+  <script>
+    // Organizadores gráficos interactivos: nodos y lentes desplegables al clic
+    document.querySelectorAll('.cd-node[data-expandable], .dual-lens .lens[data-expandable]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        el.classList.toggle('expanded');
+      });
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('role', 'button');
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.classList.toggle('expanded'); }
+      });
+    });
+  </script>
+</body>
+</html>

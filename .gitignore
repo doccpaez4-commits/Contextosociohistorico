@@ -1,0 +1,10 @@
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+.DS_Store
+**/.DS_Store
+._*
+**/._*
+_preview/
+01-contexto-sociohistorico-cultural/

@@ -1,0 +1,63 @@
+# ─────────────────────────────────────────────────────────────
+# Datos del periodo académico — EDITAR AQUÍ CADA SEMESTRE
+# Esta es la única información que normalmente cambia de un
+# semestre a otro (fechas, salón, docente). El resto del sitio
+# (metodología, contenidos, evaluación, rúbricas) no depende de
+# este archivo, así que actualizar el semestre siguiente es tan
+# simple como editar las fechas de abajo.
+# ─────────────────────────────────────────────────────────────
+
+periodo: "202680"
+nrc: "126"
+codigo: "SAL00049"
+horas: "48"
+docente: "Carlos Duván Páez"
+salon: "Salón 405, Sede 101"
+horario_general: "Viernes, 12:15 p. m. – 4:00 p. m."
+
+sesiones:
+  - numero: 1
+    fecha: "21 de agosto de 2026"
+    dia: "Viernes"
+    hora: "12:15 p. m. – 4:00 p. m."
+    salon: "Salón 405, Sede 101"
+  - numero: 2
+    fecha: "4 de septiembre de 2026"
+    dia: "Viernes"
+    hora: "12:15 p. m. – 4:00 p. m."
+    salon: "Salón 405, Sede 101"
+  - numero: 3
+    fecha: "18 de septiembre de 2026"
+    dia: "Viernes"
+    hora: "12:15 p. m. – 4:00 p. m."
+    salon: "Salón 405, Sede 101"
+  - numero: 4
+    fecha: "2 de octubre de 2026"
+    dia: "Viernes"
+    hora: "12:15 p. m. – 4:00 p. m."
+    salon: "Salón 405, Sede 101"
+  - numero: 5
+    fecha: "16 de octubre de 2026"
+    dia: "Viernes"
+    hora: "12:15 p. m. – 4:00 p. m."
+    salon: "Salón 405, Sede 101"
+  - numero: 6
+    fecha: "30 de octubre de 2026"
+    dia: "Viernes"
+    hora: "12:15 p. m. – 4:00 p. m."
+    salon: "Salón 405, Sede 101"
+  - numero: 7
+    fecha: "13 de noviembre de 2026"
+    dia: "Viernes"
+    hora: "12:15 p. m. – 4:00 p. m."
+    salon: "Salón 405, Sede 101"
+  - numero: 8
+    fecha: "27 de noviembre de 2026"
+    dia: "Viernes"
+    hora: "12:15 p. m. – 4:00 p. m."
+    salon: "Salón 405, Sede 101"
+  - numero: 9
+    fecha: "4 de diciembre de 2026"
+    dia: "Viernes"
+    hora: "12:15 p. m. – 4:00 p. m."
+    salon: "Salón 405, Sede 101"
