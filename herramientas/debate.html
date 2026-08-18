@@ -4,10 +4,10 @@ title: Herramienta de Debate
 ---
 
 <h1>Herramienta de debate estructurado</h1>
-<p class="lede">Reglas + temporizador configurable — reutilizable en cualquier clase</p>
+<p class="lede">Preguntas orientadoras + reglas + temporizador circular configurable — modo presentación para proyectar en clase</p>
 
 <div class="callout">
-  Esta herramienta es <strong>genérica</strong>: cambia el título del debate, las posturas y los tiempos en el panel de configuración, y quedan guardados en este navegador. El diseño de reglas (tipos de argumentos, estructura, juego limpio) sirve para cualquier asignatura — solo el contenido del debate es propio de <em>Contexto Socio Histórico y Cultural</em>.
+  Esta herramienta es <strong>genérica</strong>: cambia el título del debate, las posturas y los tiempos en el panel de configuración, y quedan guardados en este navegador. Tú decides cuánto dura cada turno y cuántas rondas de réplica hay — abajo verás la <strong>duración total estimada</strong> actualizarse mientras ajustas los tiempos. El diseño de reglas y el motor de temporizador sirven para cualquier asignatura — el contenido del debate y las preguntas orientadoras son propios de <em>Contexto Socio Histórico y Cultural</em>.
 </div>
 
 <section class="card" id="config-panel">
@@ -26,20 +26,24 @@ title: Herramienta de Debate
     </div>
     <div class="debate-form-row">
       <label>Tiempo de apertura (min:seg)
-        <input type="text" id="cfg-apertura" value="3:00">
+        <input type="text" id="cfg-apertura" value="4:00">
       </label>
       <label>Tiempo de réplica (min:seg)
-        <input type="text" id="cfg-replica" value="2:00">
+        <input type="text" id="cfg-replica" value="2:30">
       </label>
     </div>
     <div class="debate-form-row">
-      <label>Rondas de réplica
-        <input type="number" id="cfg-rondas" value="1" min="1" max="4">
+      <label>Tiempo de cierre (min:seg)
+        <input type="text" id="cfg-cierre" value="1:30">
       </label>
-      <label class="checkbox-label">
-        <input type="checkbox" id="cfg-sonido" checked> Sonido al finalizar cada turno
+      <label>Rondas de réplica
+        <input type="number" id="cfg-rondas" value="2" min="1" max="6">
       </label>
     </div>
+    <label class="checkbox-label">
+      <input type="checkbox" id="cfg-sonido" checked> Sonido al finalizar cada turno
+    </label>
+    <div class="debate-duration-preview" id="duracion-preview">Duración total estimada: <strong>00:00</strong></div>
     <div class="debate-form-actions">
       <button class="btn btn-primary" id="btn-guardar">Guardar y generar orden del debate</button>
       <button class="btn btn-ghost" id="btn-reset-cfg">Restablecer valores</button>
@@ -51,16 +55,76 @@ title: Herramienta de Debate
   <h3 id="debate-titulo-view">—</h3>
   <div class="debate-stage">
     <div class="debate-phase" id="phase-label">Listo para iniciar</div>
-    <div class="debate-timer" id="timer-display">00:00</div>
+    <div class="debate-ring-wrap">
+      <svg class="debate-ring" viewBox="0 0 220 220">
+        <circle class="debate-ring-bg" cx="110" cy="110" r="100"></circle>
+        <circle class="debate-ring-fg" id="ring-fg" cx="110" cy="110" r="100"></circle>
+      </svg>
+      <div class="debate-timer" id="timer-display">00:00</div>
+    </div>
     <div class="debate-controls">
       <button class="btn btn-primary" id="btn-start">▶ Iniciar turno</button>
       <button class="btn btn-ghost" id="btn-pause">⏸ Pausar</button>
       <button class="btn btn-ghost" id="btn-next">⏭ Siguiente turno</button>
       <button class="btn btn-ghost" id="btn-restart">↺ Reiniciar debate</button>
+      <button class="btn btn-ghost" id="btn-present">🖥 Modo presentación</button>
     </div>
   </div>
   <ol class="debate-order" id="debate-order"></ol>
 </section>
+
+<div class="debate-present-overlay" id="present-overlay">
+  <button class="present-close" id="btn-present-close" aria-label="Cerrar modo presentación">✕</button>
+  <div class="present-title" id="present-titulo">—</div>
+  <div class="present-phase" id="present-phase">Listo para iniciar</div>
+  <div class="present-ring-wrap">
+    <svg class="present-ring" viewBox="0 0 220 220">
+      <circle class="present-ring-bg" cx="110" cy="110" r="100"></circle>
+      <circle class="present-ring-fg" id="present-ring-fg" cx="110" cy="110" r="100"></circle>
+    </svg>
+    <div class="present-timer" id="present-timer">00:00</div>
+  </div>
+  <div class="present-controls">
+    <button class="btn btn-primary" id="present-btn-start">▶ Iniciar</button>
+    <button class="btn btn-ghost" id="present-btn-pause">⏸ Pausar</button>
+    <button class="btn btn-ghost" id="present-btn-next">⏭ Siguiente</button>
+  </div>
+</div>
+
+<h2>🧭 Preguntas orientadoras del debate</h2>
+<p class="muted" style="font-size:13.5px; margin-top:-8px;">De corte crítico y reflexivo: buscan que cada postura profundice en sus implicaciones y en su relación con problemáticas locales, no solo que repita definiciones.</p>
+
+<div class="card debate-questions">
+  <h4>Para profundizar la postura "Salud Internacional"</h4>
+  <ol>
+    <li>¿En qué medida el marco de la salud internacional —construido sobre relaciones diplomáticas entre Estados— sigue siendo pertinente para problemas de salud que no respetan fronteras nacionales, como las pandemias o las migraciones forzadas?</li>
+    <li>La salud internacional surgió históricamente ligada a la medicina colonial y tropical, orientada a proteger a las potencias coloniales de las "enfermedades del trópico". ¿Qué herencias de esa lógica persisten hoy en la cooperación sanitaria entre países del Norte y del Sur global?</li>
+    <li>¿Qué ventajas ofrece pensar la salud desde la soberanía y la autodeterminación de los Estados nacionales frente a modelos de gobernanza sanitaria transnacional que diluyen esa soberanía?</li>
+  </ol>
+
+  <h4>Para profundizar la postura "Salud Global"</h4>
+  <ol>
+    <li>La salud global se presenta como respuesta a la interdependencia planetaria y a "amenazas compartidas". ¿Compartidas por quién? ¿Quién define la agenda global de salud y a partir de qué intereses?</li>
+    <li>Actores no estatales —fundaciones filantrópicas, corporaciones farmacéuticas, ONG internacionales— tienen hoy un peso decisivo en la salud global. ¿Qué implicaciones tiene que la salud de poblaciones enteras dependa de decisiones tomadas por actores sin mandato democrático directo?</li>
+    <li>¿La retórica de la "seguridad sanitaria global" protege por igual a todos los países, o termina priorizando la protección de las poblaciones e intereses económicos de los países de altos ingresos?</li>
+  </ol>
+
+  <h4>Preguntas transversales: lo global y lo local</h4>
+  <ol>
+    <li>Cuando una política de salud global —por ejemplo, una directriz de la OMS— llega a un territorio local, ¿qué se pierde y qué se gana al traducirla a las condiciones reales de una comunidad concreta?</li>
+    <li>¿Es posible hablar de "salud global" sin reproducir una mirada que convierte al Sur global en objeto de estudio y al Norte global en productor de conocimiento y soluciones? ¿Cómo se vería una salud global verdaderamente horizontal?</li>
+    <li>Pensando en su propio contexto socio-histórico y cultural, ¿qué problemática de salud local conocen que ilustre la tensión entre las agendas internacionales o globales y las necesidades específicas de una comunidad?</li>
+  </ol>
+
+  <h4>Para usar durante las réplicas (tensionar a la postura contraria)</h4>
+  <ol>
+    <li>Pidan a la postura contraria un ejemplo concreto —no hipotético— en el que su enfoque haya fallado en responder a una problemática de salud real.</li>
+    <li>Cuestionen: ¿qué actores quedan invisibilizados o sin voz en el modelo que defiende la postura contraria?</li>
+    <li>Pregunten: si su enfoque se implementara sin ningún ajuste, ¿qué comunidad o población sería la más afectada negativamente, y por qué?</li>
+  </ol>
+
+  <p class="dq-note">Sugerencia: cada participante debe retomar al menos una de estas preguntas en su discurso de apertura o en su réplica, y no solo describir su postura.</p>
+</div>
 
 <h2>Reglas del debate</h2>
 
@@ -76,7 +140,7 @@ title: Herramienta de Debate
     </ul>
   </li>
   <li><strong>Estructura del discurso:</strong> Tesis → Argumento 1 (+ evidencia) → Argumento 2 (+ evidencia) → Conclusión que retoma la tesis.</li>
-  <li><strong>Réplica:</strong> debe responder puntualmente a algo dicho por la otra postura — no repetir el discurso de apertura.</li>
+  <li><strong>Réplica:</strong> debe responder puntualmente a algo dicho por la otra postura —apoyándose en las preguntas orientadoras de arriba— y no repetir el discurso de apertura.</li>
   <li><strong>Juego limpio:</strong> no interrumpir, no atacar a la persona (solo al argumento), respetar el tiempo asignado y ceder la palabra cuando el temporizador llegue a cero.</li>
 </ol>
 </div>
@@ -90,6 +154,7 @@ title: Herramienta de Debate
 .debate-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .checkbox-label { flex-direction: row !important; align-items: center; gap: 8px !important; }
 .debate-form-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+.debate-duration-preview { font-size: 13.5px; color: var(--teal-900); background: var(--teal-100); border-radius: 8px; padding: 9px 13px; align-self: flex-start; }
 
 .btn { border: none; border-radius: 999px; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; }
 .btn-primary { background: var(--teal-500); color: var(--navy-900); }
@@ -99,7 +164,22 @@ title: Herramienta de Debate
 
 .debate-stage { text-align: center; padding: 10px 0 6px; }
 .debate-phase { font-size: 15px; font-weight: 700; color: var(--teal-700); text-transform: uppercase; letter-spacing: .04em; }
-.debate-timer { font-size: 64px; font-weight: 800; color: var(--navy-900); font-variant-numeric: tabular-nums; margin: 6px 0 14px; }
+
+/* Temporizador circular */
+.debate-ring-wrap { position: relative; width: 220px; height: 220px; margin: 14px auto 10px; }
+.debate-ring { width: 220px; height: 220px; transform: rotate(-90deg); }
+.debate-ring-bg { fill: none; stroke: var(--border); stroke-width: 12; }
+.debate-ring-fg {
+  fill: none; stroke: var(--teal-500); stroke-width: 12; stroke-linecap: round;
+  stroke-dasharray: 628.32; stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear, stroke .3s ease;
+}
+.debate-ring-fg.warning { stroke: #d97706; }
+.debate-ring-fg.danger { stroke: #dc2626; }
+.debate-timer {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 42px; font-weight: 800; color: var(--navy-900); font-variant-numeric: tabular-nums;
+}
 .debate-timer.warning { color: #d97706; }
 .debate-timer.danger { color: #dc2626; }
 .debate-controls { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 6px; }
@@ -108,18 +188,75 @@ title: Herramienta de Debate
 .debate-order li { margin: 6px 0; padding: 6px 10px; border-radius: 8px; font-size: 14px; }
 .debate-order li.active { background: var(--teal-100); font-weight: 700; color: var(--teal-900); }
 .debate-order li.done { color: var(--muted); text-decoration: line-through; }
+
+/* Preguntas orientadoras */
+.debate-questions h4 { margin: 20px 0 8px; color: var(--teal-700); font-size: 14px; text-transform: uppercase; letter-spacing: .03em; }
+.debate-questions h4:first-child { margin-top: 0; }
+.debate-questions ol { padding-left: 20px; margin: 0; }
+.debate-questions li { margin: 9px 0; font-size: 14.5px; line-height: 1.55; }
+.debate-questions .dq-note { font-size: 13px; color: var(--muted); margin: 18px 0 0; }
+
+/* Modo presentación: pantalla completa para proyectar */
+.debate-present-overlay {
+  position: fixed; inset: 0; z-index: 300; display: none;
+  flex-direction: column; align-items: center; justify-content: center;
+  background: linear-gradient(160deg, var(--navy-900), var(--teal-900));
+  transition: background .6s ease;
+  color: #fff; text-align: center; padding: 40px 20px;
+}
+.debate-present-overlay.open { display: flex; }
+.debate-present-overlay.warning { background: linear-gradient(160deg, #78350f, #b45309); }
+.debate-present-overlay.danger {
+  background: linear-gradient(160deg, #7f1d1d, #b91c1c);
+  animation: debatePulse .9s ease-in-out infinite;
+}
+@keyframes debatePulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.35); }
+}
+.present-close {
+  position: absolute; top: 22px; right: 26px; background: rgba(255,255,255,.12); border: none;
+  color: #fff; width: 44px; height: 44px; border-radius: 50%; font-size: 20px; cursor: pointer;
+}
+.present-close:hover { background: rgba(255,255,255,.25); }
+.present-title { font-size: 20px; font-weight: 700; max-width: 720px; margin-bottom: 6px; opacity: .9; }
+.present-phase { font-size: 26px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 22px; }
+.present-ring-wrap { position: relative; width: min(56vw, 380px); height: min(56vw, 380px); margin: 0 auto 26px; }
+.present-ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+.present-ring-bg { fill: none; stroke: rgba(255,255,255,.18); stroke-width: 10; }
+.present-ring-fg {
+  fill: none; stroke: #fff; stroke-width: 10; stroke-linecap: round;
+  stroke-dasharray: 628.32; stroke-dashoffset: 0; transition: stroke-dashoffset 1s linear;
+}
+.present-timer {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: min(14vw, 96px); font-weight: 800; font-variant-numeric: tabular-nums;
+}
+.present-controls { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.present-controls .btn-primary { background: #fff; color: var(--navy-900); }
+.present-controls .btn-primary:hover { background: var(--teal-100); }
+.present-controls .btn-ghost { background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.35); }
+.present-controls .btn-ghost:hover { background: rgba(255,255,255,.2); }
+
+@media (max-width: 560px) {
+  .debate-ring-wrap { width: 180px; height: 180px; }
+  .debate-ring { width: 180px; height: 180px; }
+  .debate-timer { font-size: 32px; }
+}
 </style>
 
 <script>
 (function () {
   var STORAGE_KEY = "debateTool_config_contexto";
+  var RING_C = 2 * Math.PI * 100; // ≈ 628.32, circunferencia del círculo del temporizador
 
   function parseTime(str) {
-    var parts = str.split(":").map(function (p) { return parseInt(p, 10) || 0; });
+    var parts = String(str).split(":").map(function (p) { return parseInt(p, 10) || 0; });
     if (parts.length === 1) return parts[0];
     return parts[0] * 60 + parts[1];
   }
   function formatTime(totalSeconds) {
+    totalSeconds = Math.max(0, Math.round(totalSeconds));
     var m = Math.floor(totalSeconds / 60);
     var s = totalSeconds % 60;
     return (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
@@ -131,6 +268,7 @@ title: Herramienta de Debate
     posturaB: document.getElementById("cfg-posturaB"),
     apertura: document.getElementById("cfg-apertura"),
     replica: document.getElementById("cfg-replica"),
+    cierre: document.getElementById("cfg-cierre"),
     rondas: document.getElementById("cfg-rondas"),
     sonido: document.getElementById("cfg-sonido"),
   };
@@ -145,6 +283,7 @@ title: Herramienta de Debate
       els.posturaB.value = cfg.posturaB || els.posturaB.value;
       els.apertura.value = cfg.apertura || els.apertura.value;
       els.replica.value = cfg.replica || els.replica.value;
+      els.cierre.value = cfg.cierre || els.cierre.value;
       els.rondas.value = cfg.rondas || els.rondas.value;
       els.sonido.checked = cfg.sonido !== undefined ? cfg.sonido : true;
     } catch (e) {}
@@ -157,6 +296,7 @@ title: Herramienta de Debate
       posturaB: els.posturaB.value,
       apertura: els.apertura.value,
       replica: els.replica.value,
+      cierre: els.cierre.value,
       rondas: parseInt(els.rondas.value, 10) || 1,
       sonido: els.sonido.checked,
     };
@@ -164,12 +304,29 @@ title: Herramienta de Debate
     return cfg;
   }
 
+  function computeDurationPreview() {
+    var apertura = parseTime(els.apertura.value);
+    var replica = parseTime(els.replica.value);
+    var cierre = parseTime(els.cierre.value);
+    var rondas = parseInt(els.rondas.value, 10) || 1;
+    var total = (2 * apertura) + (rondas * 2 * replica) + (2 * cierre);
+    var el = document.getElementById("duracion-preview");
+    if (el) {
+      el.innerHTML = "Duración total estimada: <strong>" + formatTime(total) + "</strong> (" + Math.round(total / 60) + " min aprox., " + rondas + " ronda" + (rondas > 1 ? "s" : "") + " de réplica)";
+    }
+  }
+
   loadConfig();
+  computeDurationPreview();
+  [els.apertura, els.replica, els.cierre, els.rondas].forEach(function (el) {
+    el.addEventListener("input", computeDurationPreview);
+  });
 
   // ---- Debate engine ----
   var order = [];
   var currentIndex = -1;
   var remaining = 0;
+  var stepTotal = 0;
   var timerHandle = null;
   var running = false;
 
@@ -178,10 +335,18 @@ title: Herramienta de Debate
   var phaseLabel = document.getElementById("phase-label");
   var timerDisplay = document.getElementById("timer-display");
   var orderList = document.getElementById("debate-order");
+  var ringFg = document.getElementById("ring-fg");
+
+  var presentOverlay = document.getElementById("present-overlay");
+  var presentTitulo = document.getElementById("present-titulo");
+  var presentPhase = document.getElementById("present-phase");
+  var presentTimer = document.getElementById("present-timer");
+  var presentRingFg = document.getElementById("present-ring-fg");
 
   function buildOrder(cfg) {
     var aperturaSec = parseTime(cfg.apertura);
     var replicaSec = parseTime(cfg.replica);
+    var cierreSec = parseTime(cfg.cierre);
     var seq = [];
     seq.push({ label: "Apertura — " + cfg.posturaA, seconds: aperturaSec });
     seq.push({ label: "Apertura — " + cfg.posturaB, seconds: aperturaSec });
@@ -189,8 +354,8 @@ title: Herramienta de Debate
       seq.push({ label: "Réplica " + (i + 1) + " — " + cfg.posturaA, seconds: replicaSec });
       seq.push({ label: "Réplica " + (i + 1) + " — " + cfg.posturaB, seconds: replicaSec });
     }
-    seq.push({ label: "Cierre — " + cfg.posturaA, seconds: Math.round(aperturaSec / 2) });
-    seq.push({ label: "Cierre — " + cfg.posturaB, seconds: Math.round(aperturaSec / 2) });
+    seq.push({ label: "Cierre — " + cfg.posturaA, seconds: cierreSec });
+    seq.push({ label: "Cierre — " + cfg.posturaB, seconds: cierreSec });
     return seq;
   }
 
@@ -221,10 +386,25 @@ title: Herramienta de Debate
   }
 
   function updateTimerDisplay() {
-    timerDisplay.textContent = formatTime(remaining);
-    timerDisplay.classList.remove("warning", "danger");
-    if (remaining <= 10) timerDisplay.classList.add("danger");
-    else if (remaining <= 30) timerDisplay.classList.add("warning");
+    var text = formatTime(remaining);
+    var cls = remaining <= 10 ? "danger" : (remaining <= 30 ? "warning" : "");
+
+    timerDisplay.textContent = text;
+    timerDisplay.className = "debate-timer" + (cls ? " " + cls : "");
+    if (presentTimer) presentTimer.textContent = text;
+
+    var frac = stepTotal > 0 ? Math.max(0, Math.min(1, remaining / stepTotal)) : 0;
+    var offset = RING_C * (1 - frac);
+    [ringFg, presentRingFg].forEach(function (ring) {
+      if (!ring) return;
+      ring.style.strokeDashoffset = offset;
+      ring.classList.remove("warning", "danger");
+      if (cls) ring.classList.add(cls);
+    });
+    if (presentOverlay) {
+      presentOverlay.classList.remove("warning", "danger");
+      if (cls) presentOverlay.classList.add(cls);
+    }
   }
 
   function goToStep(i) {
@@ -233,12 +413,17 @@ title: Herramienta de Debate
     currentIndex = i;
     if (i >= order.length) {
       phaseLabel.textContent = "Debate finalizado";
-      timerDisplay.textContent = "00:00";
+      if (presentPhase) presentPhase.textContent = "Debate finalizado";
+      stepTotal = 0;
+      remaining = 0;
+      updateTimerDisplay();
       renderOrder();
       return;
     }
-    remaining = order[i].seconds;
+    stepTotal = order[i].seconds;
+    remaining = stepTotal;
     phaseLabel.textContent = order[i].label;
+    if (presentPhase) presentPhase.textContent = order[i].label;
     updateTimerDisplay();
     renderOrder();
   }
@@ -257,6 +442,7 @@ title: Herramienta de Debate
     var cfg = saveConfig();
     order = buildOrder(cfg);
     tituloView.textContent = cfg.titulo;
+    if (presentTitulo) presentTitulo.textContent = cfg.titulo;
     debatePanel.style.display = "block";
     goToStep(0);
     debatePanel.scrollIntoView({ behavior: "smooth" });
@@ -284,6 +470,38 @@ title: Herramienta de Debate
 
   document.getElementById("btn-restart").addEventListener("click", function () {
     goToStep(0);
+  });
+
+  // ---- Modo presentación (pantalla completa para proyectar) ----
+  document.getElementById("btn-present").addEventListener("click", function () {
+    presentOverlay.classList.add("open");
+    updateTimerDisplay();
+    if (presentOverlay.requestFullscreen) {
+      presentOverlay.requestFullscreen().catch(function () {});
+    }
+  });
+
+  document.getElementById("btn-present-close").addEventListener("click", function () {
+    presentOverlay.classList.remove("open");
+    if (document.fullscreenElement && document.exitFullscreen) {
+      document.exitFullscreen().catch(function () {});
+    }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && presentOverlay.classList.contains("open")) {
+      presentOverlay.classList.remove("open");
+    }
+  });
+
+  document.getElementById("present-btn-start").addEventListener("click", function () {
+    document.getElementById("btn-start").click();
+  });
+  document.getElementById("present-btn-pause").addEventListener("click", function () {
+    document.getElementById("btn-pause").click();
+  });
+  document.getElementById("present-btn-next").addEventListener("click", function () {
+    document.getElementById("btn-next").click();
   });
 })();
 </script>
