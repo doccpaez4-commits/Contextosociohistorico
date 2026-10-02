@@ -48,7 +48,7 @@ title: Contenidos
   </ul>
   <div class="update-block" style="background:#eef6ff; border-color:#bfdcff; border-left-color:#2563eb;">
     <h3 style="color:#1d4ed8;">🎯 Actividad evaluada — Corte 2 (30%)</h3>
-    <p><strong>Debate estructurado:</strong> Salud Internacional vs. Salud Global — implicaciones de la modernidad para la salud pública. Se realiza con la <a href="{{ '/herramientas/debate.html' | relative_url }}">herramienta de debate interactiva</a> del curso (reglas, temporizador de apertura y réplicas). Rúbrica en <a href="{{ '/rubricas.html' | relative_url }}">Rúbricas SOLO</a>.</p>
+    <p><strong>Debate estructurado:</strong> Salud Internacional vs. Salud Global — implicaciones de la modernidad para la salud pública. Se juega en la <a href="{{ '/herramientas/debate.html' | relative_url }}">arena de debate 3D</a> del curso: preguntas provocadoras, cartas de poder, jurado del público, puntos e insignias. Rúbrica en <a href="{{ '/rubricas.html' | relative_url }}">Rúbricas SOLO</a>.</p>
   </div>
 
   {% when 4 %}

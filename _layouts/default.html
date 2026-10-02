@@ -12,6 +12,8 @@
   <link rel="icon" href="data:,">
 </head>
 <body>
+  <div class="read-progress" id="readProgress" aria-hidden="true"></div>
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">↑</button>
   <div class="shell">
     <button class="sidebar-toggle" id="sidebarToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button>
 
@@ -72,6 +74,48 @@
       });
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeSidebar();
+      });
+    })();
+  </script>
+  <script>
+    // Capa de movimiento: progreso de lectura, volver arriba, aparición al hacer scroll e inclinación 3D de tarjetas
+    (function () {
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var bar = document.getElementById('readProgress'), top = document.getElementById('toTop');
+      function onScroll() {
+        var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+        if (bar) bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, h.scrollTop / max) : 0) + ')';
+        if (top) top.classList.toggle('show', h.scrollTop > 600);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+      if (top) top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+
+      var revealSel = '.content .card, .content .unit-card, .content .stat-card, .content .cut-card, .content .concept-diagram, .content .dual-lens, .content .icon-list li, .content .timeline-strip, .content .callout, .content .update-block, .content .biblio-block, .content .rubric-activity, .content .dbx-step';
+      if (!reduce && 'IntersectionObserver' in window) {
+        document.documentElement.classList.add('js-reveal');
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+        document.querySelectorAll(revealSel).forEach(function (el, i) {
+          if (el.closest('.grading-panel')) return;
+          el.classList.add('reveal');
+          el.style.transitionDelay = Math.min(i % 4, 3) * 60 + 'ms';
+          io.observe(el);
+        });
+      }
+
+      if (reduce || !window.matchMedia('(hover: hover)').matches) return;
+      document.querySelectorAll('.content .stat-card, .content .cut-card, .content .cd-node, .content .dual-lens .lens, .content .unit-card, .content .dbx-step').forEach(function (el) {
+        el.classList.add('tilt', 'tilt-glare');
+        el.addEventListener('pointermove', function (e) {
+          var r = el.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+          var amp = r.width > 480 ? 2 : 8;
+          el.style.setProperty('--ry', ((px - .5) * amp).toFixed(2) + 'deg');
+          el.style.setProperty('--rx', ((.5 - py) * amp).toFixed(2) + 'deg');
+          el.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
+          el.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
+        });
+        el.addEventListener('pointerleave', function () { el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); });
       });
     })();
   </script>
